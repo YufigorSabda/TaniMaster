@@ -1,4 +1,4 @@
-package com.example.tanimaster.ui.theme
+package com.example.tanimaster.ui.theme.theme
 
 import androidx.compose.ui.graphics.Color
 
