@@ -24,10 +24,12 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.tanimaster.R
 
 @Composable
-fun CreateAccountScreen() {
+fun SignUpScreen(navController: NavController) {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -36,15 +38,16 @@ fun CreateAccountScreen() {
 
     Column(
         modifier = Modifier
+            .statusBarsPadding()
+            .navigationBarsPadding()
             .fillMaxSize()
-            .background(Color.White)
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Top
     ) {
         Spacer(modifier = Modifier.height(16.dp))
         IconButton(
-            onClick = { /* Handle back action */ },
+            onClick = { navController.popBackStack() },
             modifier = Modifier.align(Alignment.Start)
         ) {
             Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft, contentDescription = "Back")
@@ -185,7 +188,7 @@ fun CreateAccountScreen() {
             Spacer(modifier = Modifier.width(4.dp))
             ClickableText(
                 text = AnnotatedString("Sign In"),
-                onClick = { /* Navigate to Sign In screen */ },
+                onClick = { navController.navigate("signin") },
                 style = TextStyle(color = Color(0xFFFF9800), textDecoration = TextDecoration.Underline)
             )
         }
@@ -194,6 +197,6 @@ fun CreateAccountScreen() {
 
 @Preview(showBackground = true)
 @Composable
-fun CreateAccountScreenPreview() {
-    CreateAccountScreen()
+fun SignUpScreenPreview() {
+    SignUpScreen(navController = rememberNavController())
 }
