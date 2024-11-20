@@ -23,22 +23,26 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.tanimaster.R
 
 @Composable
-fun SignInScreen() {
+fun SignInScreen(navController: NavController) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
 
     Column(
         modifier = Modifier
+            .statusBarsPadding()
+            .navigationBarsPadding()
             .fillMaxSize()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         IconButton(
-            onClick = { /* Handle back action */ },
+            onClick = { navController.popBackStack() },
             modifier = Modifier.align(Alignment.Start)
         ) {
             Icon(imageVector = Icons.AutoMirrored.Filled.KeyboardArrowLeft, contentDescription = "Back")
@@ -142,7 +146,7 @@ fun SignInScreen() {
             Text(
                 text = "Sign Up",
                 color = Color(0xFFFF9800),
-                modifier = Modifier.clickable { /* Handle sign up action */ }
+                modifier = Modifier.clickable { navController.navigate("signup") }
             )
         }
     }
@@ -162,7 +166,7 @@ fun SocialIconButton(iconResId: Int, onClick: () -> Unit) {
             Image(
                 painter = painterResource(id = iconResId),
                 contentDescription = null,
-                modifier = Modifier.padding(12.dp)
+                modifier = Modifier.padding(5.dp)
             )
         }
     }
@@ -171,5 +175,5 @@ fun SocialIconButton(iconResId: Int, onClick: () -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun SignInScreenPreview() {
-    SignInScreen()
+    SignInScreen(navController = rememberNavController())
 }

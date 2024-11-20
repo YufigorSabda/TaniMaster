@@ -23,10 +23,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import com.example.tanimaster.R
 
 @Composable
-fun WelcomeScreen() {
+fun WelcomeScreen(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -55,7 +57,7 @@ fun WelcomeScreen() {
 
         // Tombol "Masuk"
         Button(
-            onClick = { /* Handle masuk action */ },
+            onClick = { navController.navigate("signin") },
             modifier = Modifier
                 .fillMaxWidth(0.6f)
                 .height(48.dp),
@@ -76,7 +78,7 @@ fun WelcomeScreen() {
 
         // Tombol "Daftar"
         Button(
-            onClick = { /* Handle daftar action */ },
+            onClick = { navController.navigate("signup")},
             modifier = Modifier
                 .fillMaxWidth(0.6f)
                 .height(48.dp),
@@ -98,5 +100,5 @@ fun WelcomeScreen() {
 @Preview(showBackground = true)
 @Composable
 fun WelcomeScreenPreview() {
-    WelcomeScreen()
+    WelcomeScreen(navController = rememberNavController())
 }
