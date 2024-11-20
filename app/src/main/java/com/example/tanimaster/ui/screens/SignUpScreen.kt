@@ -1,7 +1,8 @@
-package com.example.tanimaster.ui.theme.screens
+@file:Suppress("DEPRECATION")
+
+package com.example.tanimaster.ui.screens
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
@@ -10,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowLeft
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,14 +29,17 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.tanimaster.R
+import com.example.tanimaster.ui.theme.AuthViewModel
 
 @Composable
-fun SignUpScreen(navController: NavController) {
+fun SignUpScreen(navController: NavController, authViewModel: AuthViewModel) {
     var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     var termsChecked by remember { mutableStateOf(false) }
+
+    val authState = authViewModel.authState.observeAsState()
 
     Column(
         modifier = Modifier
@@ -133,7 +138,7 @@ fun SignUpScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // Daftar Button
+
         Button(
             onClick = { /* Handle register action */ },
             modifier = Modifier
@@ -147,7 +152,6 @@ fun SignUpScreen(navController: NavController) {
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Social Sign-In options
         Row(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center,
@@ -160,7 +164,7 @@ fun SignUpScreen(navController: NavController) {
                 fontSize = 14.sp,
                 modifier = Modifier.padding(horizontal = 8.dp)
             )
-            Divider(modifier = Modifier.weight(1f), color = Color.Gray, thickness = 1.dp)
+            HorizontalDivider(modifier = Modifier.weight(1f), thickness = 1.dp, color = Color.Gray)
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -198,5 +202,7 @@ fun SignUpScreen(navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun SignUpScreenPreview() {
-    SignUpScreen(navController = rememberNavController())
+    val navController = rememberNavController()
+    val authViewModel = AuthViewModel()
+    SignUpScreen(navController = navController, authViewModel = authViewModel)
 }

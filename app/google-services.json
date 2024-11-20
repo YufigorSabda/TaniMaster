@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "765571398659",
+    "project_id": "fir-authtanimaster",
+    "storage_bucket": "fir-authtanimaster.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:765571398659:android:96356202dd5d61ab9e6236",
+        "android_client_info": {
+          "package_name": "com.example.tanimaster"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCLttJBPd9efiM5s84cnqUsElfup1__3Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
