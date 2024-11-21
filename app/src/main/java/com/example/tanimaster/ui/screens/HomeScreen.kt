@@ -15,6 +15,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,10 +30,21 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.tanimaster.R
 import com.example.tanimaster.ui.components.BottomAppBar
+import com.example.tanimaster.ui.theme.AuthState
+import com.example.tanimaster.ui.theme.AuthViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen(navController: NavController? = null) {
+fun HomeScreen(navController: NavController, authViewModel: AuthViewModel) {
+    val authState = authViewModel.authState.observeAsState()
+
+    LaunchedEffect(authState.value) {
+        when(authState.value) {
+            is AuthState.Unauthenticated -> navController.navigate("login")
+            else -> Unit
+        }
+    }
+
     Scaffold(
         modifier = Modifier
             .statusBarsPadding()
@@ -79,5 +92,5 @@ fun HomeScreen(navController: NavController? = null) {
 @Preview(showBackground = true)
 @Composable
 fun HomeScreenPreview() {
-    HomeScreen(navController = rememberNavController())
+    HomeScreen(navController = rememberNavController(), authViewModel = AuthViewModel())
 }

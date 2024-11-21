@@ -10,6 +10,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.tanimaster.ui.screens.HomeScreen
 import com.example.tanimaster.ui.theme.TaniMasterTheme
 import com.example.tanimaster.ui.theme.AuthViewModel
 import com.example.tanimaster.ui.theme.screens.SignInScreen
@@ -27,13 +28,14 @@ class MainActivity : ComponentActivity() {
             TaniMasterTheme {
                 NavHost(navController = navController, startDestination = "welcome") {
                     composable("welcome") { WelcomeScreen(navController = navController) }
-                    composable("signin") { SignInScreen(navController = navController) }
+                    composable("signin") { SignInScreen(navController = navController, authViewModel = authViewModel) }
                     composable("signup") {
                         SignUpScreen(
                             navController = navController,
                             authViewModel = authViewModel
                         )
                     }
+                    composable("home") { HomeScreen(navController = navController, authViewModel = authViewModel) }
                 }
             }
         }

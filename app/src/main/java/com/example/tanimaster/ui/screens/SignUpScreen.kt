@@ -2,6 +2,7 @@
 
 package com.example.tanimaster.ui.screens
 
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,6 +16,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
@@ -29,17 +31,28 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.tanimaster.R
+import com.example.tanimaster.ui.theme.AuthState
 import com.example.tanimaster.ui.theme.AuthViewModel
 
 @Composable
 fun SignUpScreen(navController: NavController, authViewModel: AuthViewModel) {
-    var name by remember { mutableStateOf("") }
+//    var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
     var termsChecked by remember { mutableStateOf(false) }
 
     val authState = authViewModel.authState.observeAsState()
+    val context =  LocalContext.current
+
+    LaunchedEffect(authState.value) {
+        when(authState.value) {
+            is AuthState.Authenticated -> navController.navigate("home")
+            is AuthState.Error -> Toast.makeText(context,
+                (authState.value as AuthState.Error).message, Toast.LENGTH_SHORT).show()
+            else -> Unit
+        }
+    }
 
     Column(
         modifier = Modifier
@@ -72,16 +85,16 @@ fun SignUpScreen(navController: NavController, authViewModel: AuthViewModel) {
             modifier = Modifier.padding(top = 8.dp, bottom = 24.dp)
         )
 
-        // Name field
-        OutlinedTextField(
-            value = name,
-            onValueChange = { name = it },
-            label = { Text("Name") },
-            modifier = Modifier.fillMaxWidth(),
-            singleLine = true
-        )
-
-        Spacer(modifier = Modifier.height(16.dp))
+//        // Name field
+//        OutlinedTextField(
+//            value = name,
+//            onValueChange = { name = it },
+//            label = { Text("Name") },
+//            modifier = Modifier.fillMaxWidth(),
+//            singleLine = true
+//        )
+//
+//        Spacer(modifier = Modifier.height(16.dp))
 
         // Email field
         OutlinedTextField(
@@ -140,7 +153,7 @@ fun SignUpScreen(navController: NavController, authViewModel: AuthViewModel) {
 
 
         Button(
-            onClick = { /* Handle register action */ },
+            onClick = { authViewModel.signup(email, password) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp),
