@@ -33,7 +33,7 @@ import com.example.tanimaster.R
 import com.example.tanimaster.ui.components.BottomAppBar
 
 @Composable
-fun ProfileScreen(navController: NavController? = null) {
+fun ProfileScreen(navController: NavController) {
     Scaffold (
         modifier = Modifier
             .statusBarsPadding()
