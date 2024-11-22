@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.example.tanimaster" />
+                  <option name="mobileSdkAppId" value="1:765571398659:android:96356202dd5d61ab9e6236" />
+                  <option name="projectId" value="fir-authtanimaster" />
+                  <option name="projectNumber" value="765571398659" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

@@ -186,15 +186,15 @@ fun SignUpScreen(navController: NavController, authViewModel: AuthViewModel) {
             horizontalArrangement = Arrangement.SpaceAround,
             modifier = Modifier.fillMaxWidth()
         ) {
-            IconButton(onClick = { /* Handle TikTok sign in */ }) {
-                Image(painter = painterResource(id = R.drawable.ic_tiktok), contentDescription = "TikTok")
-            }
+//            IconButton(onClick = { /* Handle TikTok sign in */ }) {
+//                Image(painter = painterResource(id = R.drawable.ic_tiktok), contentDescription = "TikTok")
+//            }
             IconButton(onClick = { /* Handle Google sign in */ }) {
                 Image(painter = painterResource(id = R.drawable.ic_google), contentDescription = "Google")
             }
-            IconButton(onClick = { /* Handle Facebook sign in */ }) {
-                Image(painter = painterResource(id = R.drawable.ic_fb), contentDescription = "Facebook")
-            }
+//            IconButton(onClick = { /* Handle Facebook sign in */ }) {
+//                Image(painter = painterResource(id = R.drawable.ic_fb), contentDescription = "Facebook")
+//            }
         }
 
         Spacer(modifier = Modifier.height(24.dp))

@@ -150,9 +150,9 @@ fun SignInScreen(navController: NavController, authViewModel: AuthViewModel) {
             horizontalArrangement = Arrangement.spacedBy(16.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            SocialIconButton(iconResId = R.drawable.ic_tiktok) { /* Handle TikTok login */ }
+//            SocialIconButton(iconResId = R.drawable.ic_tiktok) { /* Handle TikTok login */ }
             SocialIconButton(iconResId = R.drawable.ic_google) { /* Handle Google login */ }
-            SocialIconButton(iconResId = R.drawable.ic_fb) { /* Handle Facebook login */ }
+//            SocialIconButton(iconResId = R.drawable.ic_fb) { /* Handle Facebook login */ }
         }
 
         Spacer(modifier = Modifier.height(16.dp))
