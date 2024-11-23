@@ -38,7 +38,7 @@ fun ProfileScreen(
             ) {
                 ProfileHeader()
                 Spacer(modifier = Modifier.height(16.dp))
-                LogoutButton(authViewModel)
+                LogoutButton(navController, authViewModel)
             }
         }
     )
@@ -69,7 +69,7 @@ fun ProfileHeader() {
 }
 
 @Composable
-fun LogoutButton(authViewModel: AuthViewModel) {
+fun LogoutButton(navController: NavController, authViewModel: AuthViewModel) {
     var showConfirmationDialog by remember { mutableStateOf(false) }
 
     Button(
@@ -89,6 +89,7 @@ fun LogoutButton(authViewModel: AuthViewModel) {
             confirmButton = {
                 Button(onClick = {
                     authViewModel.signout() // Panggil signout dari ViewModel
+                    navController.navigate("welcome") { popUpTo("welcome") { inclusive = true } } // Navigasi ke WelcomeScreen
                     showConfirmationDialog = false
                 }) {
                     Text(text = "Ya")
