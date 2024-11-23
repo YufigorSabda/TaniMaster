@@ -10,24 +10,29 @@ class AuthViewModel : ViewModel() {
     private val auth: FirebaseAuth = FirebaseAuth.getInstance()
 
     private val _authState = MutableLiveData<AuthState>()
-    val authState: LiveData<AuthState> = _authState
+    val authState: LiveData<AuthState> get() = _authState
 
     init {
         checkAuthStatus()
     }
 
+    private fun updateAuthState() {
+        _authState.postValue(
+            if (auth.currentUser == null) {
+                AuthState.Unauthenticated
+            } else {
+                AuthState.Authenticated
+            }
+        )
+    }
+
     fun checkAuthStatus() {
-        _authState.value = if (auth.currentUser == null) {
-            AuthState.Unauthenticated
-        } else {
-            AuthState.Authenticated
-        }
+        updateAuthState()
     }
 
     fun login(email: String, password: String) {
-
-        if (email.isEmpty() || password.isEmpty()) {
-            _authState.value = AuthState.Error("Email atau Password belum diisi!")
+        if (email.isBlank() || password.isBlank()) {
+            _authState.value = AuthState.Error("Email atau password belum diisi!")
             return
         }
 
@@ -36,18 +41,18 @@ class AuthViewModel : ViewModel() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    _authState.value = AuthState.Authenticated
+                    updateAuthState()
                 } else {
                     _authState.value = AuthState.Error(
-                        task.exception?.message ?: "Ada kesalahan, tolong coba lagi"
+                        task.exception?.localizedMessage ?: "Gagal masuk. Coba lagi nanti."
                     )
                 }
             }
     }
-    fun signup(email: String, password: String) {
 
-        if (email.isEmpty() || password.isEmpty()) {
-            _authState.value = AuthState.Error("Email atau Password belum diisi!")
+    fun signup(email: String, password: String) {
+        if (email.isBlank() || password.isBlank()) {
+            _authState.value = AuthState.Error("Email atau password belum diisi!")
             return
         }
 
@@ -56,18 +61,18 @@ class AuthViewModel : ViewModel() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    _authState.value = AuthState.Authenticated
+                    updateAuthState()
                 } else {
                     _authState.value = AuthState.Error(
-                        task.exception?.message ?: "Ada kesalahan, tolong coba lagi"
+                        task.exception?.localizedMessage ?: "Gagal mendaftar. Coba lagi nanti."
                     )
                 }
             }
     }
 
-    fun signout(){
+    fun signout() {
         auth.signOut()
-        _authState.value = AuthState.Unauthenticated
+        updateAuthState()
     }
 }
 
