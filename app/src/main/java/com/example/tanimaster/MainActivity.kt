@@ -32,11 +32,7 @@ class MainActivity : ComponentActivity() {
                     composable("signin") { SignInScreen(navController = navController, authViewModel = authViewModel) }
                     composable("signup") { SignUpScreen(navController = navController, authViewModel = authViewModel) }
                     composable("home") { HomeScreen(navController = navController, authViewModel = authViewModel) }
-                    composable("profile") {
-                        ProfileScreen(
-                            navController = navController,
-                            authViewModel = authViewModel // Tambahkan ini
-                        )
+                    composable("profile") { ProfileScreen(navController = navController, authViewModel = authViewModel)
                     }
                 }
             }

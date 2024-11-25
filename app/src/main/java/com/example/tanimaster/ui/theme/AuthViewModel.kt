@@ -70,7 +70,7 @@ class AuthViewModel : ViewModel() {
             }
     }
 
-    fun signout() {
+    fun logout() { // logout
         auth.signOut()
         updateAuthState()
     }
