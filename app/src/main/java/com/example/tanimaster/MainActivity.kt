@@ -12,10 +12,11 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.tanimaster.ui.screens.HomeScreen
 import com.example.tanimaster.ui.screens.ProfileScreen
+import com.example.tanimaster.ui.screens.KeuanganScreen
+import com.example.tanimaster.ui.screens.SignUpScreen
 import com.example.tanimaster.ui.theme.TaniMasterTheme
 import com.example.tanimaster.ui.theme.AuthViewModel
 import com.example.tanimaster.ui.theme.screens.SignInScreen
-import com.example.tanimaster.ui.screens.SignUpScreen
 import com.example.tanimaster.ui.theme.screens.WelcomeScreen
 
 class MainActivity : ComponentActivity() {
@@ -24,7 +25,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
-            val authViewModel: AuthViewModel = viewModel() // Inisialisasi AuthViewModel
+            val authViewModel: AuthViewModel = viewModel()
 
             TaniMasterTheme {
                 NavHost(navController = navController, startDestination = "welcome") {
@@ -32,8 +33,8 @@ class MainActivity : ComponentActivity() {
                     composable("signin") { SignInScreen(navController = navController, authViewModel = authViewModel) }
                     composable("signup") { SignUpScreen(navController = navController, authViewModel = authViewModel) }
                     composable("home") { HomeScreen(navController = navController, authViewModel = authViewModel) }
-                    composable("profile") { ProfileScreen(navController = navController, authViewModel = authViewModel)
-                    }
+                    composable("profile") { ProfileScreen(navController = navController, authViewModel = authViewModel) }
+                    composable("keuangan") { KeuanganScreen(navController = navController, authViewModel = authViewModel) }
                 }
             }
         }
