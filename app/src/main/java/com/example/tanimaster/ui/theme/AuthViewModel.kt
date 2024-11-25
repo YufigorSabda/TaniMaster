@@ -26,7 +26,7 @@ class AuthViewModel : ViewModel() {
         )
     }
 
-    fun checkAuthStatus() {
+    private fun checkAuthStatus() {
         updateAuthState()
     }
 
@@ -70,15 +70,15 @@ class AuthViewModel : ViewModel() {
             }
     }
 
-    fun logout() { // logout
+    fun signout() {
         auth.signOut()
         updateAuthState()
     }
 }
 
 sealed class AuthState {
-    object Authenticated : AuthState()
-    object Unauthenticated : AuthState()
-    object Loading : AuthState()
+    data object Authenticated : AuthState()
+    data object Unauthenticated : AuthState()
+    data object Loading : AuthState()
     data class Error(val message: String) : AuthState()
 }

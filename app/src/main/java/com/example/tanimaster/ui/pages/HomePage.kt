@@ -60,7 +60,7 @@ fun HomePage(modifier: Modifier = Modifier, navController: NavController) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column {
-                HeadingText("Hallo, Gilang!")
+                HeadingText("Hallo, Figor!")
                 CustomText("You have 1 task today~")
             }
             BoxImage(

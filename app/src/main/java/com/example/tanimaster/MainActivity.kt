@@ -10,14 +10,12 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.tanimaster.ui.screens.RegisterScreen
+import com.example.tanimaster.ui.screens.WelcomeScreen
 import com.example.tanimaster.ui.screens.HomeScreen
-import com.example.tanimaster.ui.screens.ProfileScreen
-import com.example.tanimaster.ui.screens.KeuanganScreen
-import com.example.tanimaster.ui.screens.SignUpScreen
 import com.example.tanimaster.ui.theme.TaniMasterTheme
 import com.example.tanimaster.ui.theme.AuthViewModel
-import com.example.tanimaster.ui.theme.screens.SignInScreen
-import com.example.tanimaster.ui.theme.screens.WelcomeScreen
+import com.example.tanimaster.ui.screens.LoginScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,15 +24,12 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             val authViewModel: AuthViewModel = viewModel()
-
             TaniMasterTheme {
                 NavHost(navController = navController, startDestination = "welcome") {
                     composable("welcome") { WelcomeScreen(navController = navController) }
-                    composable("signin") { SignInScreen(navController = navController, authViewModel = authViewModel) }
-                    composable("signup") { SignUpScreen(navController = navController, authViewModel = authViewModel) }
+                    composable("signin") { LoginScreen(navController = navController, authViewModel = authViewModel) }
+                    composable("signup") { RegisterScreen(navController = navController, authViewModel = authViewModel) }
                     composable("home") { HomeScreen(navController = navController, authViewModel = authViewModel) }
-                    composable("profile") { ProfileScreen(navController = navController, authViewModel = authViewModel) }
-                    composable("keuangan") { KeuanganScreen(navController = navController, authViewModel = authViewModel) }
                 }
             }
         }

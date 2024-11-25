@@ -1,4 +1,4 @@
-package com.example.tanimaster.ui.theme.screens
+package com.example.tanimaster.ui.screens
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -26,11 +26,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.tanimaster.R
-import com.example.tanimaster.ui.theme.AuthState
 import com.example.tanimaster.ui.theme.AuthViewModel
+import com.example.tanimaster.ui.theme.AuthState
+
 
 @Composable
-fun SignInScreen(navController: NavController, authViewModel: AuthViewModel) {
+fun LoginScreen(navController: NavController, authViewModel: AuthViewModel) {
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     var passwordVisible by remember { mutableStateOf(false) }
@@ -112,7 +113,7 @@ fun SignInScreen(navController: NavController, authViewModel: AuthViewModel) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
-            onClick = {  },
+            onClick = { authViewModel.login(email, password) },
             modifier = Modifier
                 .fillMaxWidth()
                 .height(48.dp),
@@ -136,9 +137,9 @@ fun SignInScreen(navController: NavController, authViewModel: AuthViewModel) {
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Divider(modifier = Modifier.weight(1f))
+            HorizontalDivider(modifier = Modifier.weight(1f))
             Text("Or sign with", modifier = Modifier.padding(horizontal = 8.dp))
-            Divider(modifier = Modifier.weight(1f))
+            HorizontalDivider(modifier = Modifier.weight(1f))
         }
 
         Spacer(modifier = Modifier.height(16.dp))
@@ -188,6 +189,6 @@ fun SocialIconButton(iconResId: Int, onClick: () -> Unit) {
 
 @Preview(showBackground = true)
 @Composable
-fun SignInScreenPreview() {
-    SignInScreen(navController = rememberNavController(), authViewModel = AuthViewModel())
+fun LoginScreenPreview() {
+    LoginScreen(navController = rememberNavController(), authViewModel = AuthViewModel())
 }

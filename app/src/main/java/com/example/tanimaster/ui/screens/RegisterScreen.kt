@@ -1,6 +1,5 @@
-@file:Suppress("DEPRECATION")
-
 package com.example.tanimaster.ui.screens
+
 
 import android.widget.Toast
 import androidx.compose.foundation.Image
@@ -35,7 +34,7 @@ import com.example.tanimaster.ui.theme.AuthState
 import com.example.tanimaster.ui.theme.AuthViewModel
 
 @Composable
-fun SignUpScreen(navController: NavController, authViewModel: AuthViewModel) {
+fun RegisterScreen(navController: NavController, authViewModel: AuthViewModel) {
 //    var name by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -170,7 +169,7 @@ fun SignUpScreen(navController: NavController, authViewModel: AuthViewModel) {
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Divider(modifier = Modifier.weight(1f), color = Color.Gray, thickness = 1.dp)
+            HorizontalDivider(modifier = Modifier.weight(1f), thickness = 1.dp, color = Color.Gray)
             Text(
                 text = " Or sign with ",
                 color = Color.Gray,
@@ -214,8 +213,8 @@ fun SignUpScreen(navController: NavController, authViewModel: AuthViewModel) {
 
 @Preview(showBackground = true)
 @Composable
-fun SignUpScreenPreview() {
+fun RegisterScreenPreview() {
     val navController = rememberNavController()
     val authViewModel = AuthViewModel()
-    SignUpScreen(navController = navController, authViewModel = authViewModel)
+    RegisterScreen(navController = navController, authViewModel = authViewModel)
 }
