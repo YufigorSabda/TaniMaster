@@ -1,4 +1,4 @@
-package com.example.tanimaster.ui.theme
+package com.example.tanimaster.ui.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

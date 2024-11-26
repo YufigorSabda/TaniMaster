@@ -26,8 +26,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.example.tanimaster.R
-import com.example.tanimaster.ui.theme.AuthViewModel
-import com.example.tanimaster.ui.theme.AuthState
+import com.example.tanimaster.ui.viewmodel.AuthViewModel
+import com.example.tanimaster.ui.viewmodel.AuthState
 
 
 @Composable
