@@ -102,7 +102,7 @@ fun ProfileOptions(navController: NavController) {
         "Panduan",
         "Akun",
         "Keamanan",
-        "Tem",
+        "Tema",
         "Histori",
         "Notifikasi",
         "About App"
