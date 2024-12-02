@@ -18,6 +18,8 @@ import com.example.tanimaster.ui.screens.RegisterScreen
 import com.example.tanimaster.ui.screens.WelcomeScreen
 import com.example.tanimaster.ui.theme.TaniMasterTheme
 import com.example.tanimaster.ui.viewmodel.AuthViewModel
+import com.example.tanimaster.ui.screens.InputModalScreen
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,6 +35,7 @@ class MainActivity : ComponentActivity() {
                     composable("signup") { RegisterScreen(navController = navController, authViewModel = authViewModel) }
                     composable("home") { HomeScreen(navController = navController, authViewModel = authViewModel) }
                     composable("addtask") { AddTaskScreen(navController = navController, modifier = Modifier) }
+                    composable("input_modal_screen") { InputModalScreen(navController = navController) }
                 }
             }
         }

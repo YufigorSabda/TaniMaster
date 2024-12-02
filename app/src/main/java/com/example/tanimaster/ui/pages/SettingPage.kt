@@ -1,15 +1,7 @@
 package com.example.tanimaster.ui.pages
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -20,6 +12,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Alignment.Companion.Top
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -34,49 +27,45 @@ fun SettingPage(modifier: Modifier = Modifier, navController: NavController, onL
         modifier = modifier
             .fillMaxSize()
             .background(Color.White)
-            .padding(16.dp)
     ) {
-        ProfileContent(navController, onLogout)
+
+        ProfileHeader(modifier = Modifier.padding(top = 16.dp, bottom = 16.dp))
+
+
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(horizontal = 16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            item {
+                ProfileOptions(navController)
+            }
+            item {
+                Spacer(modifier = Modifier.height(16.dp))
+                ButtonText(
+                    text = "Logout",
+                    modifier = Modifier.fillMaxWidth(),
+                    onClick = onLogout
+                )
+            }
+            item {
+                Spacer(modifier = Modifier.height(16.dp))
+                Text(
+                    text = "Versi Aplikasi TaniMaster 1.0.0",
+                    fontSize = 16.sp,
+                    color = Color.Gray,
+                    modifier = Modifier.padding(16.dp)
+                )
+            }
+        }
     }
 }
 
 @Composable
-fun ProfileContent(navController: NavController, onLogout: () -> Unit) {
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(horizontal = 16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        item {
-            ProfileHeader()
-            Spacer(modifier = Modifier.height(16.dp))
-        }
-        item {
-            ProfileOptions(navController)
-        }
-        item {
-            ButtonText(
-                text = "Logout",
-                modifier = Modifier,
-                onClick = onLogout
-            )
-        }
-        item {
-            Spacer(modifier = Modifier.height(16.dp))
-            Text(
-                text = "Versi Aplikasi TaniMaster 1.0.0",
-                fontSize = 12.sp,
-                color = Color.Gray,
-                modifier = Modifier.padding(16.dp)
-            )
-        }
-    }
-}
-@Composable
-fun ProfileHeader() {
+fun ProfileHeader(modifier: Modifier = Modifier) {
     Column(
+        modifier = modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(
@@ -85,9 +74,9 @@ fun ProfileHeader() {
                 .background(Color.White, shape = CircleShape),
             contentAlignment = Alignment.Center
         ) {
-            // Tempat untuk Foto Profil (Tambahkan resource jika ada)
+            // Tempat untuk Foto Profil
         }
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(2.dp))
         Text(
             text = "Sigma Farm",
             fontSize = 20.sp,
@@ -96,6 +85,7 @@ fun ProfileHeader() {
         )
     }
 }
+
 @Composable
 fun ProfileOptions(navController: NavController) {
     val options = listOf(
@@ -122,13 +112,14 @@ fun ProfileOptions(navController: NavController) {
         }
     }
 }
+
 @Composable
 fun ProfileOptionButton(label: String) {
     TextButton(
         onClick = { /* Tambahkan logika tombol */ },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 8.dp, horizontal = 16.dp)
+            .padding(vertical = 10.dp, horizontal = 16.dp)
     ) {
         Text(
             text = label,

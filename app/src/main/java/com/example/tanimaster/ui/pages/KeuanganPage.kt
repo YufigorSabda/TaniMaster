@@ -11,7 +11,10 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -19,9 +22,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.ui.Alignment
 
 @Composable
 fun KeuanganPage(modifier: Modifier = Modifier, navController: NavController) {
@@ -31,10 +31,10 @@ fun KeuanganPage(modifier: Modifier = Modifier, navController: NavController) {
             .background(Color.White)
             .padding(16.dp)
     ) {
-        // Box Keuangan Anda
-        BoxKeuanganAnda()
+        BoxKeuanganAnda(navController)
+
         Spacer(modifier = Modifier.height(4.dp))
-        // History Aktivitas Keuangan
+
         Text(
             text = "History Aktivitas Keuangan",
             fontSize = 18.sp,
@@ -42,10 +42,11 @@ fun KeuanganPage(modifier: Modifier = Modifier, navController: NavController) {
             color = Color.Black,
             modifier = Modifier.padding(horizontal = 16.dp)
         )
+
         Spacer(modifier = Modifier.height(8.dp))
+
         // History List dalam bentuk tabel (statis sementara)
         Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-            // Tabel header
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -56,7 +57,6 @@ fun KeuanganPage(modifier: Modifier = Modifier, navController: NavController) {
                 Text("Deskripsi", modifier = Modifier.weight(2f), textAlign = TextAlign.Center)
                 Text("Jumlah", modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
             }
-            // Isi tabel (statis sementara)
             repeat(4) { index ->
                 Row(
                     modifier = Modifier
@@ -71,33 +71,24 @@ fun KeuanganPage(modifier: Modifier = Modifier, navController: NavController) {
                 }
             }
         }
+
         Spacer(modifier = Modifier.height(16.dp))
-        // Button Detail
+
+        // Button Input Modal
         Button(
-            onClick = { /* Handle detail action */ },
+            onClick = { navController.navigate("input_modal_screen") },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF388E3C)) // Hijau
+            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2196F3)) // Blue
         ) {
-            Text(text = "Detail", color = Color.White)
-        }
-        Spacer(modifier = Modifier.height(2.dp))
-        // Button Export Data Keuangan
-        Button(
-            onClick = { /* Handle export action */ },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00695C))
-        ) {
-            Text(text = "Export Data Keuangan", color = Color.White)
+            Text(text = "Input Modal", color = Color.White)
         }
     }
 }
 
 @Composable
-fun BoxKeuanganAnda() {
+fun BoxKeuanganAnda(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -125,20 +116,22 @@ fun BoxKeuanganAnda() {
             horizontalArrangement = Arrangement.SpaceEvenly
         ) {
             Button(
-                onClick = { /* Handle Input Modal */ },
+                onClick = {
+                    navController.navigate("input_modal_screen")
+                },
                 modifier = Modifier
                     .weight(1f)
                     .padding(end = 8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2196F3))
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2196F3)) // Blue
             ) {
                 Text(text = "Input Modal", color = Color.White, textAlign = TextAlign.Center)
             }
             Button(
-                onClick = { /* Handle Input Pengeluaran */ },
+                onClick = { /* Handle Pengeluaran */ },
                 modifier = Modifier
                     .weight(1f)
                     .padding(start = 8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF44336))
+                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF44336)) // Red
             ) {
                 Text(text = "Pengeluaran", color = Color.White, textAlign = TextAlign.Center)
             }
