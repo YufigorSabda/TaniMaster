@@ -11,6 +11,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.tanimaster.ui.pages.KeuanganPage
 import com.example.tanimaster.ui.screens.AddTaskScreen
 import com.example.tanimaster.ui.screens.HomeScreen
 import com.example.tanimaster.ui.screens.LoginScreen
@@ -38,6 +39,8 @@ class MainActivity : ComponentActivity() {
                     composable("addtask") { AddTaskScreen(navController = navController, modifier = Modifier) }
                     composable("input_modal_screen") { InputModalScreen(navController = navController) }
                     composable("pengeluaran_screen") { PengeluaranScreen(navController = navController) }
+                    composable("keuangan") { KeuanganPage(navController = navController) }
+
                 }
             }
         }
