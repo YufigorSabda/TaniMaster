@@ -107,7 +107,7 @@ fun BoxKeuanganAnda(navController: NavController) {
                         .padding(start = 8.dp),
                     text = "Pengeluaran",
                     onClick = {
-                        // Handle Pengeluaran logic
+                        navController.navigate("pengeluaran_screen")
                     }
                 )
             }

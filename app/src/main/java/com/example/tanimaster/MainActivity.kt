@@ -19,6 +19,7 @@ import com.example.tanimaster.ui.screens.WelcomeScreen
 import com.example.tanimaster.ui.theme.TaniMasterTheme
 import com.example.tanimaster.ui.viewmodel.AuthViewModel
 import com.example.tanimaster.ui.screens.InputModalScreen
+import com.example.tanimaster.ui.screens.PengeluaranScreen
 
 
 class MainActivity : ComponentActivity() {
@@ -36,6 +37,7 @@ class MainActivity : ComponentActivity() {
                     composable("home") { HomeScreen(navController = navController, authViewModel = authViewModel) }
                     composable("addtask") { AddTaskScreen(navController = navController, modifier = Modifier) }
                     composable("input_modal_screen") { InputModalScreen(navController = navController) }
+                    composable("pengeluaran_screen") { PengeluaranScreen(navController = navController) }
                 }
             }
         }
