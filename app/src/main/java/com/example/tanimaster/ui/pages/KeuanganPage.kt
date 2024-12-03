@@ -1,18 +1,9 @@
 package com.example.tanimaster.ui.pages
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Text
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -45,96 +36,183 @@ fun KeuanganPage(modifier: Modifier = Modifier, navController: NavController) {
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // History List dalam bentuk tabel (statis sementara)
-        Column(modifier = Modifier.padding(horizontal = 16.dp)) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .background(Color(0xFFE0E0E0)),
-                horizontalArrangement = Arrangement.SpaceEvenly
-            ) {
-                Text("Tanggal", modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
-                Text("Deskripsi", modifier = Modifier.weight(2f), textAlign = TextAlign.Center)
-                Text("Jumlah", modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
-            }
-            repeat(4) { index ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(vertical = 2.dp)
-                        .background(Color.White, RoundedCornerShape(8.dp))
-                        .padding(16.dp)
-                ) {
-                    Text("2024-11-25", modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
-                    Text("Transaksi $index", modifier = Modifier.weight(2f), textAlign = TextAlign.Center)
-                    Text("Rp ${index * 1000}", modifier = Modifier.weight(1f), textAlign = TextAlign.Center)
-                }
-            }
-        }
+        // Tabel Futuristik
+        HistoryTable()
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // Button Input Modal
-        Button(
-            onClick = { navController.navigate("input_modal_screen") },
+        // Button Export PDF
+        ButtonText(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(horizontal = 16.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2196F3)) // Blue
-        ) {
-            Text(text = "Input Modal", color = Color.White)
-        }
+            text = "Export PDF",
+            onClick = {
+                // Handle export PDF logic
+            }
+        )
     }
 }
 
 @Composable
 fun BoxKeuanganAnda(navController: NavController) {
-    Column(
+    Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
-            .background(Color.White, RoundedCornerShape(8.dp))
             .padding(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(
+            containerColor = Color(0xFFEAF8F1) // Warna hijau lembut
+        ),
+        elevation = CardDefaults.cardElevation(
+            defaultElevation = 8.dp
+        )
     ) {
-        Text(
-            text = "Keuangan Anda",
-            fontSize = 20.sp,
-            fontWeight = FontWeight.Bold,
-            color = Color.Black
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = "Total Keuangan: Rp 10,000,000",
-            fontSize = 16.sp,
-            fontWeight = FontWeight.Medium,
-            color = Color(0xFF388E3C)
-        )
-        Spacer(modifier = Modifier.height(16.dp))
-        Row(
-            modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.SpaceEvenly
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(16.dp),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(
-                onClick = {
-                    navController.navigate("input_modal_screen")
-                },
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(end = 8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF2196F3)) // Blue
+            Text(
+                text = "Keuangan Anda",
+                fontSize = 20.sp,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            )
+            Spacer(modifier = Modifier.height(8.dp))
+            Text(
+                text = "Total Keuangan: Rp 10,000,000",
+                fontSize = 16.sp,
+                fontWeight = FontWeight.Medium,
+                color = Color(0xFF388E3C)
+            )
+            Spacer(modifier = Modifier.height(16.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
             ) {
-                Text(text = "Input Modal", color = Color.White, textAlign = TextAlign.Center)
-            }
-            Button(
-                onClick = { /* Handle Pengeluaran */ },
-                modifier = Modifier
-                    .weight(1f)
-                    .padding(start = 8.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFF44336)) // Red
-            ) {
-                Text(text = "Pengeluaran", color = Color.White, textAlign = TextAlign.Center)
+                ButtonText(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(end = 8.dp),
+                    text = "Input Modal",
+                    onClick = {
+                        navController.navigate("input_modal_screen")
+                    }
+                )
+                ButtonText(
+                    modifier = Modifier
+                        .weight(1f)
+                        .padding(start = 8.dp),
+                    text = "Pengeluaran",
+                    onClick = {
+                        // Handle Pengeluaran logic
+                    }
+                )
             }
         }
+    }
+}
+
+@Composable
+fun HistoryTable() {
+    Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+        Card(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(8.dp),
+            shape = RoundedCornerShape(8.dp),
+            elevation = CardDefaults.cardElevation(
+                defaultElevation = 4.dp
+            )
+        ) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color(0xFF55AA68)),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Text(
+                    text = "Tanggal",
+                    modifier = Modifier.weight(1f),
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    text = "Deskripsi",
+                    modifier = Modifier.weight(2f),
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+                Text(
+                    text = "Jumlah",
+                    modifier = Modifier.weight(1f),
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+                )
+            }
+        }
+
+        // Baris data
+        repeat(4) { index ->
+            Card(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp),
+                shape = RoundedCornerShape(8.dp),
+                colors = CardDefaults.cardColors(
+                    containerColor = Color.White
+                ),
+                elevation = CardDefaults.cardElevation(
+                    defaultElevation = 2.dp
+                )
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(16.dp),
+                    horizontalArrangement = Arrangement.SpaceBetween
+                ) {
+                    Text(
+                        text = "2024-11-25",
+                        modifier = Modifier.weight(1f),
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        text = "Transaksi $index",
+                        modifier = Modifier.weight(2f),
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        text = "Rp ${index * 1000}",
+                        modifier = Modifier.weight(1f),
+                        textAlign = TextAlign.Center
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun ButtonText(
+    modifier: Modifier = Modifier,
+    text: String,
+    onClick: () -> Unit = {}
+) {
+    Button(
+        onClick = onClick,
+        modifier = modifier,
+        shape = RoundedCornerShape(10.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Color(0xFF55AA68),
+            contentColor = Color.White
+        )
+    ) {
+        Text(text = text)
     }
 }
