@@ -3,15 +3,16 @@
 package com.example.tanimaster.ui.screens
 
 import android.annotation.SuppressLint
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalView
@@ -19,12 +20,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.core.view.ViewCompat
-import com.example.tanimaster.ui.components.ButtonText
+import androidx.navigation.NavController
 import com.example.tanimaster.ui.components.CustomText
 import androidx.compose.foundation.text.KeyboardOptions
-
+import androidx.compose.material.icons.Icons
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -33,7 +33,7 @@ fun InputModalScreen(modifier: Modifier = Modifier, navController: NavController
     val view = LocalView.current
     if (!view.isInEditMode) {
         val windowInsetsController = ViewCompat.getWindowInsetsController(view)
-        windowInsetsController?.isAppearanceLightStatusBars = false // false untuk ikon putih
+        windowInsetsController?.isAppearanceLightStatusBars = false // Ikon putih di status bar
     }
 
     Scaffold(
@@ -42,7 +42,7 @@ fun InputModalScreen(modifier: Modifier = Modifier, navController: NavController
             TopAppBar(
                 title = { Text("Input Modal Keuangan", fontSize = 20.sp, fontWeight = FontWeight.Bold) },
                 colors = TopAppBarDefaults.smallTopAppBarColors(
-                    containerColor = Color(0xFF55AA68),
+                    containerColor = Color(0xFF55AA68), // Hijau
                     titleContentColor = Color.White
                 ),
                 navigationIcon = {
@@ -59,11 +59,11 @@ fun InputModalScreen(modifier: Modifier = Modifier, navController: NavController
     }
 }
 
-@OptIn(ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ContentScreen(modifier: Modifier, navController: NavController) {
-    var modalAmount by remember { mutableStateOf("") }  // Properti untuk jumlah modal
-    var description by remember { mutableStateOf("") }  // Properti untuk deskripsi
+    var modalAmount by remember { mutableStateOf("") } // Properti untuk jumlah modal
+    var description by remember { mutableStateOf("") } // Properti untuk deskripsi
 
     Column(
         modifier = modifier
@@ -71,61 +71,81 @@ fun ContentScreen(modifier: Modifier, navController: NavController) {
             .background(Color.White)
             .padding(16.dp)
             .verticalScroll(rememberScrollState()),
-        verticalArrangement = Arrangement.spacedBy(20.dp)
+        verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Modal Amount Input (Only Numbers)
-        Column(
-            verticalArrangement = Arrangement.spacedBy(5.dp)
-        ) {
+        // Input Jumlah Modal
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             CustomText("Jumlah Modal")
-            // Menggunakan TextField dengan keyboardOptions untuk angka
-            TextField(
+            OutlinedTextField(
                 value = modalAmount,
                 onValueChange = { newAmount ->
-                    if (newAmount.all { it.isDigit() }) {  // Only allow digits
+                    if (newAmount.all { it.isDigit() }) { // Hanya angka yang diperbolehkan
                         modalAmount = newAmount
                     }
                 },
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                modifier = Modifier.fillMaxWidth(),
                 placeholder = { Text("Masukkan jumlah modal") },
-                singleLine = true
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(8.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    containerColor = Color(0xFFF7F7F7),
+                    focusedBorderColor = Color(0xFF55AA68), // Hijau saat fokus
+                    unfocusedBorderColor = Color(0xFFD3D3D3),
+                )
             )
         }
 
-        // Description Input (Wider TextField)
-        Column(
-            verticalArrangement = Arrangement.spacedBy(5.dp)
-        ) {
+        // Input Deskripsi Modal
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
             CustomText("Deskripsi")
-            TextField(
+            OutlinedTextField(
                 value = description,
                 onValueChange = { description = it },
+                placeholder = { Text("Masukkan deskripsi...") },
+                maxLines = 5,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(150.dp)  // Membuat kolom deskripsi lebih lebar ke bawah
-                    .background(Color(0xFFF0F0F0), shape = RoundedCornerShape(8.dp)),
-                placeholder = { Text("Masukkan deskripsi...") },
-                textStyle = MaterialTheme.typography.bodyLarge.copy(fontSize = 14.sp),
-                maxLines = 5  // Allow multiline input for description
+                    .height(150.dp),
+                shape = RoundedCornerShape(8.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    containerColor = Color(0xFFF7F7F7),
+                    focusedBorderColor = Color(0xFF55AA68), // Hijau saat fokus
+                    unfocusedBorderColor = Color(0xFFD3D3D3),
+                )
             )
         }
 
-        // Action Button for Submit
-        ButtonText(
-            modifier = Modifier
-                .fillMaxWidth(),
-            text = "Simpan"
-        )
-
-        // Cancel Action (Optional)
-        OutlinedButton(
-            onClick = { navController.popBackStack() },
+        // Action Buttons (Simpan dan Batal)
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
-
+                .padding(top = 8.dp),
+            horizontalArrangement = Arrangement.spacedBy(8.dp, Alignment.CenterHorizontally)
         ) {
-            Text("Batal")
+            // Tombol Simpan
+            Button(
+                onClick = { /* Tambahkan aksi simpan */ },
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color(0xFF55AA68) // Hijau
+                )
+            ) {
+                Text("Simpan", color = Color.White)
+            }
+
+            // Tombol Batal
+            OutlinedButton(
+                onClick = { navController.popBackStack() },
+                modifier = Modifier.weight(1f),
+                colors = ButtonDefaults.outlinedButtonColors(
+                    containerColor = Color.Transparent,
+                    contentColor = Color(0xFF55AA68) // Hijau
+                ),
+                border = BorderStroke(1.dp, Color(0xFF55AA68))
+            ) {
+                Text("Batal")
+            }
         }
     }
 }
