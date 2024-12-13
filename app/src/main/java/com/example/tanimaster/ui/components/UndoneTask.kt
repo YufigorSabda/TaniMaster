@@ -12,7 +12,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun Task() {
+fun UndoneTask() {
     Box(
         modifier = Modifier
             .padding(8.dp)
@@ -29,11 +29,11 @@ fun Task() {
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Text(text = "DONE", fontWeight = FontWeight.Bold, color = Color(0xFF55AA68))
+                Text(text = "UNDONE", fontWeight = FontWeight.Bold, color = Color(0xFFBB4B4B))
                 Text(text = "Project", fontWeight = FontWeight.Normal, color = Color.Gray)
             }
             Text(text = "Produktivitas Petani", fontWeight = FontWeight.SemiBold)
-            Text(text = "13 Desember, 2024")
+            Text(text = "14 Desember, 2024")
         }
     }
 }

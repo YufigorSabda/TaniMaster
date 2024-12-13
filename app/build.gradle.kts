@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.tanimaster"
-        minSdk = 24
+        minSdk = 26
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
@@ -68,6 +68,7 @@ dependencies {
     implementation(libs.places)
     implementation(libs.retrofit)
     implementation(libs.converter.gson)
+    implementation(libs.androidx.benchmark.macro)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -77,5 +78,14 @@ dependencies {
     debugImplementation(libs.androidx.ui.test.manifest)
     implementation(libs.androidx.navigation.compose)
 
+    // Dependensi Material Calendar View
+    implementation(libs.view)
 
+    // Dependensi Coil untuk memuat gambar (opsional, tapi sangat disarankan untuk Compose)
+    implementation(libs.coil.compose) // Gunakan versi terbaru
+
+    // Jika menggunakan Lifecycle KTX untuk ViewModel di Compose
+    implementation(libs.androidx.lifecycle.viewmodel.compose) // Gunakan versi terbaru
+
+    implementation(libs.threetenabp)
 }

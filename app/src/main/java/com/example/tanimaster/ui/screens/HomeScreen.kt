@@ -62,12 +62,13 @@ import androidx.core.view.ViewCompat
 import androidx.navigation.NavController
 import com.example.tanimaster.R
 import com.example.tanimaster.ui.components.NavItem
-import com.example.tanimaster.ui.pages.HomePage
 import com.example.tanimaster.ui.pages.InventarisProduksiPage
 import com.example.tanimaster.ui.pages.KeuanganPage
 import com.example.tanimaster.ui.pages.SettingPage
 import com.example.tanimaster.ui.viewmodel.AuthState
 import com.example.tanimaster.ui.viewmodel.AuthViewModel
+import com.example.tanimaster.ui.pages.HomePage
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

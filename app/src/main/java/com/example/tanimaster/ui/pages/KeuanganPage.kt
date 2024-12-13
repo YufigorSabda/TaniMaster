@@ -183,12 +183,12 @@ fun HistoryTable() {
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        text = "Transaksi $index",
+                        text = "Modal $index",
                         modifier = Modifier.weight(2f),
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        text = "Rp ${index * 1000}",
+                        text = "Rp ${index * 1000.000}",
                         modifier = Modifier.weight(1f),
                         textAlign = TextAlign.Center
                     )
