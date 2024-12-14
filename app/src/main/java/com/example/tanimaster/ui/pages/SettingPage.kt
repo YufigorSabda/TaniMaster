@@ -29,13 +29,13 @@ fun SettingPage(modifier: Modifier = Modifier, navController: NavController, onL
             .background(Color.White)
     ) {
 
-        ProfileHeader(modifier = Modifier.padding(top = 16.dp, bottom = 16.dp))
+        ProfileHeader(modifier = Modifier.padding(top = 8.dp, bottom = 16.dp))
 
 
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = 2.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             item {
@@ -70,7 +70,7 @@ fun ProfileHeader(modifier: Modifier = Modifier) {
     ) {
         Box(
             modifier = Modifier
-                .size(100.dp)
+                .size(50.dp)
                 .background(Color.White, shape = CircleShape),
             contentAlignment = Alignment.Center
         ) {
@@ -119,7 +119,7 @@ fun ProfileOptionButton(label: String) {
         onClick = { /* Tambahkan logika tombol */ },
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 10.dp, horizontal = 16.dp)
+            .padding(vertical = 10.dp, horizontal = 14.dp)
     ) {
         Text(
             text = label,
