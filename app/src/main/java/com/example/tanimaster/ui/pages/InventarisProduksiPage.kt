@@ -12,9 +12,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -63,7 +65,6 @@ fun InventarisProduksiPage(modifier: Modifier = Modifier, navController: NavCont
                     )
                 }
 
-                // Mengurangi atau menghapus spacer setelah TabRow agar tidak ada ruang kosong yang tidak perlu
                 Spacer(modifier = Modifier.height(8.dp)) // Spacer yang lebih kecil
 
                 // Tab Content
@@ -71,11 +72,6 @@ fun InventarisProduksiPage(modifier: Modifier = Modifier, navController: NavCont
                     0 -> ProduksiContent(navController = navController)
                     1 -> InventarisContent(navController = navController)
                 }
-
-                Spacer(modifier = Modifier.height(24.dp))
-
-                // Tombol Export di bagian bawah
-                ExportButton(onClick = { /* Tambahkan logika export */ })
             }
         }
     )
@@ -86,11 +82,89 @@ fun ProduksiContent(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(26.dp)
     ) {
-        SectionCard(title = "Jumlah Penanaman") { /* Arahkan ke halaman Jumlah Penanaman */ }
-        SectionCard(title = "Hasil Panen") { /* Arahkan ke halaman Hasil Panen */ }
+        // Jumlah Penanaman Section
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFFF6F6F6))
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text(
+                    text = "Jumlah Penanaman",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF55AA68)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                ButtonText(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = "Tambah Data Penanaman",
+                    onClick = { /* Tambahkan logika navigasi */ }
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                // Tabel Jumlah Bibit Ditanam
+                HistoryTable(
+                    headers = listOf("Nama Bibit", "Jumlah (kg)", "Waktu Ditanam"),
+                    rows = listOf(
+                        listOf("Padi", "50", "2024-11-01"),
+                        listOf("Jagung", "30", "2024-11-02"),
+                        listOf("Wheat", "20", "2024-11-03"),
+                        listOf("Barley", "40", "2024-11-04"),
+                        listOf("Sorghum", "60", "2024-11-05")
+                    )
+                )
+            }
+        }
+
+        // Hasil Panen Section
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFFF6F6F6))
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text(
+                    text = "Hasil Panen",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF55AA68)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                ButtonText(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = "Input Berat Hasil Panen (kg)",
+                    onClick = { /* Tambahkan logika navigasi */ }
+                )
+
+
+                Spacer(modifier = Modifier.height(8.dp))
+                // Tabel Hasil Panen
+                HistoryTable(
+                    headers = listOf("Jenis Tumbuhan", "Harga Jual"),
+                    rows = listOf(
+                        listOf("Padi", "Rp 2,500,000"),
+                        listOf("Jagung", "Rp 2,500,000"),
+                        listOf("Wheat", "Rp 1,500,000"),
+                        listOf("Barley", "Rp 3,000,000"),
+                        listOf("Sorghum", "Rp 4,000,000")
+                    )
+                )
+
+            }
+        }
     }
 }
 
@@ -99,50 +173,135 @@ fun InventarisContent(navController: NavController) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(26.dp)
     ) {
-        SectionCard(title = "Inventory Bahan Bibit") { /* Arahkan ke halaman Bahan Bibit */ }
-        SectionCard(title = "Inventory Bahan Baku") { /* Arahkan ke halaman Bahan Baku */ }
-    }
-}
-
-@Composable
-fun SectionCard(title: String, onClick: () -> Unit) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(100.dp),
-        shape = RoundedCornerShape(16.dp),
-        elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-        colors = CardDefaults.cardColors(containerColor = Color(0xFFF6F6F6))
-    ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            contentAlignment = Alignment.Center
+        // Inventory Bahan Bibit Section
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFFF6F6F6))
         ) {
-            Text(
-                text = title,
-                fontSize = 18.sp,
-                fontWeight = FontWeight.Bold,
-                color = Color(0xFF55AA68)
-            )
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text(
+                    text = "Inventory Bahan Bibit",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF55AA68)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                ButtonText(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = "Tambah Bahan Bibit",
+                    onClick = { /* Tambahkan logika navigasi */ }
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                // Contoh tabel bahan bibit
+                HistoryTable(
+                    headers = listOf("Nama Bibit", "Stok (kg)", "Tanggal Masuk"),
+                    rows = listOf(
+                        listOf("Padi", "100", "2024-11-05"),
+                        listOf("Jagung", "200", "2024-11-06"),
+                        listOf("Wheat", "150", "2024-11-07"),
+                        listOf("Barley", "250", "2024-11-08"),
+                        listOf("Sorghum", "300", "2024-11-09")
+                    )
+                )
+            }
+        }
+
+        // Inventory Bahan Baku Section
+        Card(
+            modifier = Modifier.fillMaxWidth(),
+            shape = RoundedCornerShape(16.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
+            colors = CardDefaults.cardColors(containerColor = Color(0xFFF6F6F6))
+        ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(16.dp)
+            ) {
+                Text(
+                    text = "Inventory Bahan Baku",
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color(0xFF55AA68)
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                ButtonText(
+                    modifier = Modifier.fillMaxWidth(),
+                    text = "Tambah Bahan Baku",
+                    onClick = { /* Tambahkan logika navigasi */ }
+                )
+                Spacer(modifier = Modifier.height(8.dp))
+                // Contoh tabel bahan baku
+                HistoryTable(
+                    headers = listOf("Nama Bahan", "Stok (kg)", "Tanggal Masuk"),
+                    rows = listOf(
+                        listOf("Pupuk", "500", "2024-11-07"),
+                        listOf("Pestisida", "300", "2024-11-08"),
+                        listOf("Kapur", "100", "2024-11-09"),
+                        listOf("Pupuk Organik", "200", "2024-11-10"),
+                        listOf("Herbisida", "150", "2024-11-11")
+                    )
+                )
+            }
         }
     }
 }
 
 @Composable
 fun ExportButton(onClick: () -> Unit) {
-    Button(
-        onClick = onClick,
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(48.dp),
-        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF55AA68)),
-        shape = RoundedCornerShape(8.dp)
+    ButtonText(
+        modifier = Modifier.fillMaxWidth(),
+        text = "Export Data",
+        onClick = onClick
+    )
+}
+
+@Composable
+fun HistoryTable(headers: List<String>, rows: List<List<String>>) {
+    Column(
+        modifier = Modifier.fillMaxWidth()
     ) {
-        Text(text = "Export Data", color = Color.White, fontWeight = FontWeight.Bold)
+        // Table headers
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp)
+        ) {
+            headers.forEach { header ->
+                Text(
+                    text = header,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.Bold,
+                    color = Color.Gray,
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        }
+        Spacer(modifier = Modifier.height(8.dp))
+        // Table rows
+        rows.forEach { row ->
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(16.dp)
+            ) {
+                row.forEach { cell ->
+                    Text(
+                        text = cell,
+                        fontSize = 14.sp,
+                        color = Color.Black,
+                        modifier = Modifier.weight(1f)
+                    )
+                }
+            }
+            Spacer(modifier = Modifier.height(4.dp))
+        }
     }
 }
