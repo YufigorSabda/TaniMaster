@@ -178,17 +178,17 @@ fun HistoryTable() {
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
-                        text = "2024-11-25",
+                        text = "26-11-24",
                         modifier = Modifier.weight(1f),
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        text = "Modal $index",
+                        text = "Modal Awal",
                         modifier = Modifier.weight(2f),
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        text = "Rp ${index * 1000.000}",
+                        text = "USD ${index * 1000.000}",
                         modifier = Modifier.weight(1f),
                         textAlign = TextAlign.Center
                     )
