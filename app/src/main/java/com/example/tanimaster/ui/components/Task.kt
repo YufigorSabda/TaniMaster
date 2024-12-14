@@ -18,8 +18,8 @@ fun Task() {
             .padding(8.dp)
             .width(300.dp)
             .height(150.dp)
-            .shadow(4.dp, RoundedCornerShape(8.dp)) // HANYA BARIS INI YANG DITAMBAHKAN (untuk bayangan)
-            .background(Color.White, RoundedCornerShape(8.dp)) // Background tetap ada
+            .shadow(4.dp, RoundedCornerShape(8.dp))
+            .background(Color.White, RoundedCornerShape(8.dp))
             .padding(8.dp)
     ) {
         Column(
@@ -30,9 +30,9 @@ fun Task() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(text = "DONE", fontWeight = FontWeight.Bold, color = Color(0xFF55AA68))
-                Text(text = "Project", fontWeight = FontWeight.Normal, color = Color.Gray)
+                Text(text = "Tugas", fontWeight = FontWeight.Normal, color = Color.Gray)
             }
-            Text(text = "Produktivitas Petani", fontWeight = FontWeight.SemiBold)
+            Text(text = "Kelola Irigasi", fontWeight = FontWeight.SemiBold)
             Text(text = "13 Desember, 2024")
         }
     }

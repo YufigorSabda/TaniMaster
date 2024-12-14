@@ -18,8 +18,8 @@ fun UndoneTask() {
             .padding(8.dp)
             .width(300.dp)
             .height(150.dp)
-            .shadow(4.dp, RoundedCornerShape(8.dp)) // HANYA BARIS INI YANG DITAMBAHKAN (untuk bayangan)
-            .background(Color.White, RoundedCornerShape(8.dp)) // Background tetap ada
+            .shadow(4.dp, RoundedCornerShape(8.dp))
+            .background(Color.White, RoundedCornerShape(8.dp))
             .padding(8.dp)
     ) {
         Column(
@@ -30,9 +30,9 @@ fun UndoneTask() {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(text = "UNDONE", fontWeight = FontWeight.Bold, color = Color(0xFFBB4B4B))
-                Text(text = "Project", fontWeight = FontWeight.Normal, color = Color.Gray)
+                Text(text = "Tugas", fontWeight = FontWeight.Normal, color = Color.Gray)
             }
-            Text(text = "Produktivitas Petani", fontWeight = FontWeight.SemiBold)
+            Text(text = "Kelola Lahan", fontWeight = FontWeight.SemiBold)
             Text(text = "14 Desember, 2024")
         }
     }
