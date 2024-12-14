@@ -69,7 +69,7 @@ fun HomePage(modifier: Modifier = Modifier, navController: NavController) {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                HeadingText("Today")
+                HeadingText("Kalender")
                 Row(verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.spacedBy(10.dp)) {
                     Icon(imageVector = Icons.Default.DateRange, modifier = Modifier.size(14.dp), contentDescription = "Date range", tint = Color.Black)
                     val today = LocalDate.now()
