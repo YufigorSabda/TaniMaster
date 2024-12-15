@@ -88,4 +88,7 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose) // Gunakan versi terbaru
 
     implementation(libs.threetenabp)
+
+    //Implementasi Splash Screen
+    implementation(libs.androidx.core.splashscreen)
 }

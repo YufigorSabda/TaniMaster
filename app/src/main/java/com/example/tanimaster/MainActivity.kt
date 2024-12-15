@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -26,11 +27,12 @@ import com.example.tanimaster.ui.screens.PengeluaranScreen
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
             val authViewModel: AuthViewModel = viewModel()
-            TaniMasterTheme() {
+            TaniMasterTheme {
                 NavHost(navController = navController, startDestination = "welcome") {
                     composable("welcome") { WelcomeScreen(navController = navController) }
                     composable("signin") { LoginScreen(navController = navController, authViewModel = authViewModel) }
@@ -50,7 +52,7 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun MainPreview() {
-    TaniMasterTheme() {
+    TaniMasterTheme {
         WelcomeScreen(navController = rememberNavController())
     }
 }
