@@ -148,8 +148,8 @@ fun ProduksiContent(navController: NavController) {
                 Spacer(modifier = Modifier.height(8.dp))
                 ButtonText(
                     modifier = Modifier.fillMaxWidth(),
-                    text = "Input Berat Hasil Panen (kg)",
-                    onClick = { /* Tambahkan logika navigasi */ }
+                    text = "Input Hasil Panen (kg)",
+                    onClick = { navController.navigate("input_hasil_panen_screen") }
                 )
 
 
