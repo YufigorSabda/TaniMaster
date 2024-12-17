@@ -19,8 +19,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.tanimaster.R // Pastikan import ini benar
-import com.example.tanimaster.ui.components.* // Pastikan import komponen Anda benar
+import com.example.tanimaster.R
+import com.example.tanimaster.ui.components.*
 import org.threeten.bp.DayOfWeek
 import org.threeten.bp.LocalDate
 import org.threeten.bp.YearMonth
@@ -47,10 +47,10 @@ fun HomePage(modifier: Modifier = Modifier, navController: NavController) {
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
             Column {
-                HeadingText("Hallo, Figor!") // Pastikan komponen ini ada
-                CustomText("You have 1 task today~") // Pastikan komponen ini ada
+                HeadingText("Hallo, Figor!")
+                CustomText("You have 2 task today~")
             }
-            BoxImage(imageUrl = R.drawable.profile, title = "Profile Image", size = 70.dp) // Pastikan komponen dan drawable ada
+            BoxImage(imageUrl = R.drawable.profile, title = "Profile Image", size = 70.dp)
         }
 
         // Search Bar
@@ -82,14 +82,14 @@ fun HomePage(modifier: Modifier = Modifier, navController: NavController) {
             }
 
             LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                items(2) { // Menampilkan 2 item Task
-                    Task() // Pastikan komponen ini ada
+                items(2) {
+                    Task()
                 }
             }
 
             LazyRow(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                items(2) { // Menampilkan 2 item Task
-                    UndoneTask() // Pastikan komponen ini ada
+                items(2) {
+                    UndoneTask()
                 }
             }
 

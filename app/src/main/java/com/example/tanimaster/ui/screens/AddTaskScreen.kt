@@ -68,8 +68,7 @@ fun AddTaskScreen(modifier: Modifier = Modifier, navController: NavController) {
                 }
             )
         }
-    ) {
-            innerPadding ->
+    ) { innerPadding ->
         ContentScreen(modifier = Modifier.padding(innerPadding))
     }
 }
@@ -78,7 +77,7 @@ fun AddTaskScreen(modifier: Modifier = Modifier, navController: NavController) {
 @Composable
 fun ContentScreen(modifier: Modifier) {
     val category = listOf(
-        "Perencanaan panen", "Project", "Today",
+        "Perencanaan panen", "Project",
         "Penjadwalan", "Manajemen stok", "Penyimpanan",
         "Hasil panen", "Lainnya"
     )
@@ -104,7 +103,7 @@ fun ContentScreen(modifier: Modifier) {
             SearchTextField(
                 text = "Create task management",
                 query = task_name,
-                onQueryChange = {task_name = it}
+                onQueryChange = { task_name = it }
             )
         }
 
@@ -115,7 +114,7 @@ fun ContentScreen(modifier: Modifier) {
             SearchTextField(
                 text = "Optional, max 10 characters",
                 query = task_description,
-                onQueryChange = {task_description = it}
+                onQueryChange = { task_description = it }
             )
         }
 
@@ -138,6 +137,28 @@ fun ContentScreen(modifier: Modifier) {
                     }
                 }
             }
+        }
+
+        Column(
+            verticalArrangement = Arrangement.spacedBy(5.dp)
+        ) {
+            CustomText("Start Date")
+            SearchTextField(
+                text = "yyyy-mm-dd",
+                query = startDate,
+                onQueryChange = { startDate = it }
+            )
+        }
+
+        Column(
+            verticalArrangement = Arrangement.spacedBy(5.dp)
+        ) {
+            CustomText("End Date")
+            SearchTextField(
+                text = "yyyy-mm-dd",
+                query = endDate,
+                onQueryChange = { endDate = it }
+            )
         }
 
         ButtonText(

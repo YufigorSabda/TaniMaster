@@ -31,7 +31,7 @@ fun KeuanganPage(modifier: Modifier = Modifier, navController: NavController) {
             fontSize = 18.sp,
             fontWeight = FontWeight.Bold,
             color = Color.Black,
-            modifier = Modifier.padding(horizontal = 16.dp)
+            modifier = Modifier.padding(horizontal = 8.dp)
         )
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -48,7 +48,7 @@ fun KeuanganPage(modifier: Modifier = Modifier, navController: NavController) {
                 .padding(horizontal = 16.dp),
             text = "Export PDF",
             onClick = {
-                // Handle export PDF logic
+
             }
         )
     }
@@ -82,7 +82,7 @@ fun BoxKeuanganAnda(navController: NavController) {
             )
             Spacer(modifier = Modifier.height(8.dp))
             Text(
-                text = "Total Keuangan: Rp 10,000,000",
+                text = "Total Keuangan: USD 10,000",
                 fontSize = 16.sp,
                 fontWeight = FontWeight.Medium,
                 color = Color(0xFF388E3C)
@@ -95,19 +95,10 @@ fun BoxKeuanganAnda(navController: NavController) {
                 ButtonText(
                     modifier = Modifier
                         .weight(1f)
-                        .padding(end = 8.dp),
-                    text = "Input Modal",
+                        .padding(end = 16.dp),
+                    text = "Input Data Keuangan",
                     onClick = {
                         navController.navigate("input_modal_screen")
-                    }
-                )
-                ButtonText(
-                    modifier = Modifier
-                        .weight(1f)
-                        .padding(start = 8.dp),
-                    text = "Pengeluaran",
-                    onClick = {
-                        navController.navigate("pengeluaran_screen")
                     }
                 )
             }
@@ -121,7 +112,7 @@ fun HistoryTable() {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp),
+                .padding(4.dp),
             shape = RoundedCornerShape(8.dp),
             elevation = CardDefaults.cardElevation(
                 defaultElevation = 4.dp
@@ -141,18 +132,27 @@ fun HistoryTable() {
                     textAlign = TextAlign.Center
                 )
                 Text(
-                    text = "Deskripsi",
-                    modifier = Modifier.weight(2f),
+                    text = "Tipe",
+                    modifier = Modifier.weight(1f),
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
                 )
                 Text(
-                    text = "Jumlah",
+                    text = "Nominal",
                     modifier = Modifier.weight(1f),
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
                     textAlign = TextAlign.Center
+
+                )
+                Text(
+                    text = "Deskripsi",
+                    modifier = Modifier.weight(1f),
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    textAlign = TextAlign.Center
+
                 )
             }
         }
@@ -174,7 +174,7 @@ fun HistoryTable() {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(16.dp),
+                        .padding(2.dp),
                     horizontalArrangement = Arrangement.SpaceBetween
                 ) {
                     Text(
@@ -183,12 +183,17 @@ fun HistoryTable() {
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        text = "Modal Awal",
-                        modifier = Modifier.weight(2f),
+                        text = "Pinjaman",
+                        modifier = Modifier.weight(1f),
                         textAlign = TextAlign.Center
                     )
                     Text(
                         text = "USD ${index * 1000.000}",
+                        modifier = Modifier.weight(1f),
+                        textAlign = TextAlign.Center
+                    )
+                    Text(
+                        text = "koperasi Tani",
                         modifier = Modifier.weight(1f),
                         textAlign = TextAlign.Center
                     )

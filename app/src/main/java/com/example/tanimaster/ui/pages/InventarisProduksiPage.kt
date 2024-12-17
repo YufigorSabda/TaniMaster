@@ -153,13 +153,13 @@ fun ProduksiContent(navController: NavController) {
                 Spacer(modifier = Modifier.height(8.dp))
                 // Tabel Hasil Panen
                 HistoryTable(
-                    headers = listOf("Jenis Tumbuhan", "Harga Jual"),
+                    headers = listOf("Jenis Tumbuhan","Jumlah(Kg)", "Harga Jual"),
                     rows = listOf(
-                        listOf("Padi", "Rp 2,500,000"),
-                        listOf("Jagung", "Rp 2,500,000"),
-                        listOf("Wheat", "Rp 1,500,000"),
-                        listOf("Barley", "Rp 3,000,000"),
-                        listOf("Sorghum", "Rp 4,000,000")
+                        listOf("Padi","100", "Rp 2,500,000"),
+                        listOf("Jagung","100", "Rp 2,500,000"),
+                        listOf("Wheat","100", "Rp 1,500,000"),
+                        listOf("Barley","100", "Rp 3,000,000"),
+                        listOf("Sorghum","100", "Rp 4,000,000")
                     )
                 )
 
