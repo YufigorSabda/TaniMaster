@@ -240,7 +240,7 @@ fun InventarisContent(navController: NavController) {
                 ButtonText(
                     modifier = Modifier.fillMaxWidth(),
                     text = "Tambah Bahan Baku",
-                    onClick = { /* Tambahkan logika navigasi */ }
+                    onClick = { navController.navigate("input_bahan_baku_screen") }
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 // Contoh tabel bahan baku
