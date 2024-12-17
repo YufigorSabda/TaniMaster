@@ -2,6 +2,8 @@
 
 package com.example.tanimaster.ui.screens
 
+
+
 import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
@@ -25,11 +27,13 @@ import androidx.compose.ui.unit.sp
 import androidx.core.view.ViewCompat
 import androidx.navigation.NavController
 import com.example.tanimaster.ui.components.CustomText
+import java.text.SimpleDateFormat
+import java.util.*
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InputModalScreen(modifier: Modifier = Modifier, navController: NavController) {
+fun InputPenanamanScreen(modifier: Modifier = Modifier, navController: NavController) {
     val view = LocalView.current
     if (!view.isInEditMode) {
         val windowInsetsController = ViewCompat.getWindowInsetsController(view)
@@ -40,7 +44,7 @@ fun InputModalScreen(modifier: Modifier = Modifier, navController: NavController
         modifier = Modifier.fillMaxSize(),
         topBar = {
             TopAppBar(
-                title = { Text("Input Data Keuangan", fontSize = 20.sp, fontWeight = FontWeight.Bold) },
+                title = { Text("Input Data Penanaman", fontSize = 20.sp, fontWeight = FontWeight.Bold) },
                 colors = TopAppBarDefaults.smallTopAppBarColors(
                     containerColor = Color(0xFF55AA68),
                     titleContentColor = Color.White
@@ -57,17 +61,15 @@ fun InputModalScreen(modifier: Modifier = Modifier, navController: NavController
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ContentScreen(modifier: Modifier, navController: NavController) {
-    var modalAmount by remember { mutableStateOf("") } // Properti untuk jumlah modal
-    var description by remember { mutableStateOf("") } // Properti untuk deskripsi
-    val selectedCategory = remember { mutableStateOf("") } // Properti kategori terpilih
+fun ContentPenanamanScreen(modifier: Modifier, navController: NavController) {
+    var namaBibit by remember { mutableStateOf("") } // Properti untuk nama bibit
+    var jumlah by remember { mutableStateOf("") } // Properti untuk jumlah (kg)
+    var tanggalMulai by remember { mutableStateOf("") } // Properti untuk tanggal mulai penanaman
 
-    val categories = listOf(
-        "Modal", "Pengeluaran", "Pinjaman",
-        "Pendapatan","Lainnya"
-    )
+    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    val currentDate = dateFormat.format(Date())
 
     Column(
         modifier = modifier
@@ -77,18 +79,13 @@ fun ContentScreen(modifier: Modifier, navController: NavController) {
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Input Jumlah Modal
+        // Input Nama Bibit
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            CustomText("Input Nominal")
+            CustomText("Nama Bibit")
             OutlinedTextField(
-                value = modalAmount,
-                onValueChange = { newAmount ->
-                    if (newAmount.all { it.isDigit() }) {
-                        modalAmount = newAmount
-                    }
-                },
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                placeholder = { Text("Masukkan Nominal") },
+                value = namaBibit,
+                onValueChange = { namaBibit = it },
+                placeholder = { Text("Masukkan nama bibit") },
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp),
@@ -100,19 +97,20 @@ fun ContentScreen(modifier: Modifier, navController: NavController) {
             )
         }
 
-
-
-        // Input Deskripsi Modal
+        // Input Jumlah (kg)
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            CustomText("Deskripsi")
+            CustomText("Jumlah (kg)")
             OutlinedTextField(
-                value = description,
-                onValueChange = { description = it },
-                placeholder = { Text("Masukkan deskripsi...") },
-                maxLines = 5,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(150.dp),
+                value = jumlah,
+                onValueChange = { newJumlah ->
+                    if (newJumlah.all { it.isDigit() }) {
+                        jumlah = newJumlah
+                    }
+                },
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                placeholder = { Text("Masukkan jumlah dalam kg") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp),
                 colors = TextFieldDefaults.outlinedTextFieldColors(
                     containerColor = Color(0xFFF7F7F7),
@@ -122,26 +120,22 @@ fun ContentScreen(modifier: Modifier, navController: NavController) {
             )
         }
 
+        // Input Tanggal Mulai Penanaman
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            CustomText("Kategori")
-            FlowRow(
+            CustomText("Tanggal Mulai Penanaman")
+            OutlinedTextField(
+                value = tanggalMulai,
+                onValueChange = { tanggalMulai = it },
+                placeholder = { Text(currentDate) },
+                singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                categories.forEach { category ->
-                    val isSelected = selectedCategory.value == category
-                    Button(
-                        onClick = { selectedCategory.value = category },
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = if (isSelected) Color(0xFF55AA68) else Color(0xFFE0E0E0),
-                            contentColor = if (isSelected) Color.White else Color.Black
-                        ),
-                        shape = RoundedCornerShape(16.dp)
-                    ) {
-                        Text(category)
-                    }
-                }
-            }
+                shape = RoundedCornerShape(8.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    containerColor = Color(0xFFF7F7F7),
+                    focusedBorderColor = Color(0xFF55AA68),
+                    unfocusedBorderColor = Color(0xFFD3D3D3)
+                )
+            )
         }
 
         // Tombol Aksi (Simpan dan Batal)

@@ -158,7 +158,7 @@ fun HistoryTable() {
         }
 
         // Baris data
-        repeat(4) { index ->
+        repeat(5) { index ->
             Card(
                 modifier = Modifier
                     .fillMaxWidth()

@@ -21,8 +21,8 @@ import com.example.tanimaster.ui.screens.WelcomeScreen
 import com.example.tanimaster.ui.theme.TaniMasterTheme
 import com.example.tanimaster.ui.viewmodel.AuthViewModel
 import com.example.tanimaster.ui.screens.InputModalScreen
+import com.example.tanimaster.ui.screens.InputPenanamanScreen
 import com.example.tanimaster.ui.screens.PengeluaranScreen
-
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,6 +42,7 @@ class MainActivity : ComponentActivity() {
                     composable("input_modal_screen") { InputModalScreen(navController = navController) }
                     composable("pengeluaran_screen") { PengeluaranScreen(navController = navController) }
                     composable("keuangan") { KeuanganPage(navController = navController) }
+                    composable("input_penanaman_screen") { InputPenanamanScreen(navController = navController) }
 
                 }
             }

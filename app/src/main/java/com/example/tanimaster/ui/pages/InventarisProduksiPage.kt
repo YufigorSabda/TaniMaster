@@ -107,7 +107,10 @@ fun ProduksiContent(navController: NavController) {
                 ButtonText(
                     modifier = Modifier.fillMaxWidth(),
                     text = "Tambah Data Penanaman",
-                    onClick = { /* Tambahkan logika navigasi */ }
+                    onClick = {
+
+                        navController.navigate("input_penanaman_screen")
+                    }
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 // Tabel Jumlah Bibit Ditanam
