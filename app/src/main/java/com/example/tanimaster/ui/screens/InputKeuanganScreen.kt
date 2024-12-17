@@ -25,11 +25,21 @@ import androidx.compose.ui.unit.sp
 import androidx.core.view.ViewCompat
 import androidx.navigation.NavController
 import com.example.tanimaster.ui.components.CustomText
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.Spacer
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun InputModalScreen(modifier: Modifier = Modifier, navController: NavController) {
+fun InputKeuanganScreen(modifier: Modifier = Modifier, navController: NavController) {
     val view = LocalView.current
     if (!view.isInEditMode) {
         val windowInsetsController = ViewCompat.getWindowInsetsController(view)
@@ -41,7 +51,7 @@ fun InputModalScreen(modifier: Modifier = Modifier, navController: NavController
         topBar = {
             TopAppBar(
                 title = { Text("Input Data Keuangan", fontSize = 20.sp, fontWeight = FontWeight.Bold) },
-                colors = TopAppBarDefaults.smallTopAppBarColors(
+                colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = Color(0xFF55AA68),
                     titleContentColor = Color.White
                 ),
@@ -53,20 +63,22 @@ fun InputModalScreen(modifier: Modifier = Modifier, navController: NavController
             )
         }
     ) { innerPadding ->
-        ContentPenanamanScreen(modifier = Modifier.padding(innerPadding), navController = navController)
+        ContentKeuanganScreen(modifier = Modifier.padding(innerPadding), navController = navController)
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalLayoutApi::class)
 @Composable
-fun ContentScreen(modifier: Modifier, navController: NavController) {
+fun ContentKeuanganScreen(modifier: Modifier = Modifier, navController: NavController) {
+    var selectedDate by remember { mutableStateOf("") } // Properti untuk tanggal
     var modalAmount by remember { mutableStateOf("") } // Properti untuk jumlah modal
     var description by remember { mutableStateOf("") } // Properti untuk deskripsi
-    val selectedCategory = remember { mutableStateOf("") } // Properti kategori terpilih
+    var mitra by remember { mutableStateOf("") } // Properti untuk mitra
+    val selectedCategory = remember { mutableStateOf<String?>(null) } // Properti kategori terpilih
 
     val categories = listOf(
         "Modal", "Pengeluaran", "Pinjaman",
-        "Pendapatan","Lainnya"
+        "Pendapatan", "Lainnya"
     )
 
     Column(
@@ -77,18 +89,14 @@ fun ContentScreen(modifier: Modifier, navController: NavController) {
             .verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        // Input Jumlah Modal
+        // Input Tanggal
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            CustomText("Input Nominal")
+            CustomText("Tanggal")
             OutlinedTextField(
-                value = modalAmount,
-                onValueChange = { newAmount ->
-                    if (newAmount.all { it.isDigit() }) {
-                        modalAmount = newAmount
-                    }
-                },
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                placeholder = { Text("Masukkan Nominal") },
+                value = selectedDate,
+                onValueChange = { selectedDate = it },
+                placeholder = { Text("Pilih Tanggal") },
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Text),
                 singleLine = true,
                 modifier = Modifier.fillMaxWidth(),
                 shape = RoundedCornerShape(8.dp),
@@ -100,30 +108,9 @@ fun ContentScreen(modifier: Modifier, navController: NavController) {
             )
         }
 
-
-
-        // Input Deskripsi Modal
+        // Input Kategori Modal
         Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            CustomText("Deskripsi")
-            OutlinedTextField(
-                value = description,
-                onValueChange = { description = it },
-                placeholder = { Text("Masukkan deskripsi...") },
-                maxLines = 5,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(150.dp),
-                shape = RoundedCornerShape(8.dp),
-                colors = TextFieldDefaults.outlinedTextFieldColors(
-                    containerColor = Color(0xFFF7F7F7),
-                    focusedBorderColor = Color(0xFF55AA68),
-                    unfocusedBorderColor = Color(0xFFD3D3D3)
-                )
-            )
-        }
-
-        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            CustomText("Kategori")
+            CustomText("Tipe Kategori")
             FlowRow(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.spacedBy(8.dp)
@@ -144,6 +131,49 @@ fun ContentScreen(modifier: Modifier, navController: NavController) {
             }
         }
 
+        // Input Nominal
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            CustomText("Input Nominal")
+            OutlinedTextField(
+                value = modalAmount,
+                onValueChange = { newAmount ->
+                    // Memastikan hanya angka yang dimasukkan
+                    // Menjaga agar input hanya berupa angka atau tanda koma/ titik untuk desimal
+                    if (newAmount.isEmpty() || newAmount.all { it.isDigit() || it == '.' || it == ',' }) {
+                        modalAmount = newAmount
+                    }
+                },
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                placeholder = { Text("Masukkan Nominal") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(8.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    containerColor = Color(0xFFF7F7F7),
+                    focusedBorderColor = Color(0xFF55AA68),
+                    unfocusedBorderColor = Color(0xFFD3D3D3)
+                )
+            )
+        }
+
+        // Input Mitra
+        Column(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+            CustomText("Mitra")
+            OutlinedTextField(
+                value = mitra,
+                onValueChange = { mitra = it },
+                placeholder = { Text("Masukkan Mitra") },
+                singleLine = true,
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(8.dp),
+                colors = TextFieldDefaults.outlinedTextFieldColors(
+                    containerColor = Color(0xFFF7F7F7),
+                    focusedBorderColor = Color(0xFF55AA68),
+                    unfocusedBorderColor = Color(0xFFD3D3D3)
+                )
+            )
+        }
+
         // Tombol Aksi (Simpan dan Batal)
         Row(
             modifier = Modifier
@@ -153,7 +183,11 @@ fun ContentScreen(modifier: Modifier, navController: NavController) {
         ) {
             // Tombol Simpan
             Button(
-                onClick = { /* Tambahkan aksi simpan */ },
+                onClick = {
+                    // Parse modalAmount to numeric value if needed
+                    val amount = modalAmount.replace(",", ".").toDoubleOrNull() ?: 0.0
+                    // Tambahkan aksi simpan dengan selectedDate, selectedCategory, amount, description, and mitra
+                },
                 modifier = Modifier.weight(1f),
                 colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF55AA68))
             ) {

@@ -98,7 +98,7 @@ fun BoxKeuanganAnda(navController: NavController) {
                         .padding(end = 16.dp),
                     text = "Input Data Keuangan",
                     onClick = {
-                        navController.navigate("input_modal_screen")
+                        navController.navigate("input_keuangan_screen")
                     }
                 )
             }
@@ -147,7 +147,7 @@ fun HistoryTable() {
 
                 )
                 Text(
-                    text = "Deskripsi",
+                    text = "Mitra",
                     modifier = Modifier.weight(1f),
                     color = Color.White,
                     fontWeight = FontWeight.Bold,
@@ -193,7 +193,7 @@ fun HistoryTable() {
                         textAlign = TextAlign.Center
                     )
                     Text(
-                        text = "koperasi Tani",
+                        text = "koperasi",
                         modifier = Modifier.weight(1f),
                         textAlign = TextAlign.Center
                     )

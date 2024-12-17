@@ -18,12 +18,12 @@ import com.example.tanimaster.ui.screens.HomeScreen
 import com.example.tanimaster.ui.screens.InputBahanBakuScreen
 import com.example.tanimaster.ui.screens.InputBibitScreen
 import com.example.tanimaster.ui.screens.InputHasilPanenScreen
+import com.example.tanimaster.ui.screens.InputKeuanganScreen
 import com.example.tanimaster.ui.screens.LoginScreen
 import com.example.tanimaster.ui.screens.RegisterScreen
 import com.example.tanimaster.ui.screens.WelcomeScreen
 import com.example.tanimaster.ui.theme.TaniMasterTheme
 import com.example.tanimaster.ui.viewmodel.AuthViewModel
-import com.example.tanimaster.ui.screens.InputModalScreen
 import com.example.tanimaster.ui.screens.InputPenanamanScreen
 import com.example.tanimaster.ui.screens.PengeluaranScreen
 
@@ -31,10 +31,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         installSplashScreen()
-        enableEdgeToEdge()
+        enableEdgeToEdge()  // Enable edge-to-edge display
         setContent {
             val navController = rememberNavController()
             val authViewModel: AuthViewModel = viewModel()
+
             TaniMasterTheme {
                 NavHost(navController = navController, startDestination = "welcome") {
                     composable("welcome") { WelcomeScreen(navController = navController) }
@@ -42,14 +43,13 @@ class MainActivity : ComponentActivity() {
                     composable("signup") { RegisterScreen(navController = navController, authViewModel = authViewModel) }
                     composable("home") { HomeScreen(navController = navController, authViewModel = authViewModel) }
                     composable("addtask") { AddTaskScreen(navController = navController, modifier = Modifier) }
-                    composable("input_modal_screen") { InputModalScreen(navController = navController) }
+                    composable("input_keuangan_screen") { InputKeuanganScreen(navController = navController, modifier = Modifier) }
                     composable("pengeluaran_screen") { PengeluaranScreen(navController = navController) }
                     composable("keuangan") { KeuanganPage(navController = navController) }
                     composable("input_penanaman_screen") { InputPenanamanScreen(navController = navController) }
                     composable("input_hasil_panen_screen") { InputHasilPanenScreen(navController = navController) }
                     composable("input_bibit_screen") { InputBibitScreen(navController = navController) }
                     composable("input_bahan_baku_screen") { InputBahanBakuScreen(navController = navController) }
-
                 }
             }
         }
