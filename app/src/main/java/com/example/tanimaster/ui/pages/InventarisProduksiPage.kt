@@ -131,7 +131,7 @@ fun ProduksiContent(navController: NavController) {
         Card(
             modifier = Modifier.fillMaxWidth(),
             shape = RoundedCornerShape(16.dp),
-            elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+            elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
             colors = CardDefaults.cardColors(containerColor = Color(0xFFF6F6F6))
         ) {
             Column(
@@ -308,3 +308,5 @@ fun HistoryTable(headers: List<String>, rows: List<List<String>>) {
         }
     }
 }
+
+
