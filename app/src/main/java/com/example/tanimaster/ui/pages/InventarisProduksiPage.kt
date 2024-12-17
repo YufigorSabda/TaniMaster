@@ -201,7 +201,7 @@ fun InventarisContent(navController: NavController) {
                 ButtonText(
                     modifier = Modifier.fillMaxWidth(),
                     text = "Tambah Bahan Bibit",
-                    onClick = { /* Tambahkan logika navigasi */ }
+                    onClick = { navController.navigate("input_bibit_screen") }
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 // Contoh tabel bahan bibit

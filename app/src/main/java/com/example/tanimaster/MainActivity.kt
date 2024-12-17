@@ -15,6 +15,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.tanimaster.ui.pages.KeuanganPage
 import com.example.tanimaster.ui.screens.AddTaskScreen
 import com.example.tanimaster.ui.screens.HomeScreen
+import com.example.tanimaster.ui.screens.InputBibitScreen
 import com.example.tanimaster.ui.screens.InputHasilPanenScreen
 import com.example.tanimaster.ui.screens.LoginScreen
 import com.example.tanimaster.ui.screens.RegisterScreen
@@ -24,7 +25,6 @@ import com.example.tanimaster.ui.viewmodel.AuthViewModel
 import com.example.tanimaster.ui.screens.InputModalScreen
 import com.example.tanimaster.ui.screens.InputPenanamanScreen
 import com.example.tanimaster.ui.screens.PengeluaranScreen
-import com.example.tanimaster.ui.screens.InputHasilPanenScreen
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,6 +46,7 @@ class MainActivity : ComponentActivity() {
                     composable("keuangan") { KeuanganPage(navController = navController) }
                     composable("input_penanaman_screen") { InputPenanamanScreen(navController = navController) }
                     composable("input_hasil_panen_screen") { InputHasilPanenScreen(navController = navController) }
+                    composable("input_bibit_screen") { InputBibitScreen(navController = navController) }
 
                 }
             }
