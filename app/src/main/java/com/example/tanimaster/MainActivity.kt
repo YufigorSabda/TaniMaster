@@ -9,9 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.tanimaster.ui.pages.AboutPage
 import com.example.tanimaster.ui.pages.KeuanganPage
 import com.example.tanimaster.ui.screens.AddTaskScreen
 import com.example.tanimaster.ui.screens.HomeScreen
@@ -50,6 +52,7 @@ class MainActivity : ComponentActivity() {
                     composable("input_hasil_panen_screen") { InputHasilPanenScreen(navController = navController) }
                     composable("input_bibit_screen") { InputBibitScreen(navController = navController) }
                     composable("input_bahan_baku_screen") { InputBahanBakuScreen(navController = navController) }
+                    composable("about") { AboutPage(navController = navController) }
                 }
             }
         }

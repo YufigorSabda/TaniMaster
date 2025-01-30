@@ -95,7 +95,7 @@ fun ProfileOptions(navController: NavController) {
         "Tema",
         "Histori",
         "Notifikasi",
-        "About App"
+        "Tentang Aplikasi"
     )
     Card(
         modifier = Modifier.fillMaxWidth(),
@@ -106,7 +106,16 @@ fun ProfileOptions(navController: NavController) {
             modifier = Modifier.padding(vertical = 8.dp)
         ) {
             options.forEach { label ->
-                ProfileOptionButton(label = label)
+                ProfileOptionButton(
+                    label = label,
+                    onClick = {
+                        if (label == "Tentang Aplikasi") {
+                            navController.navigate("about")
+                        } else {
+
+                        }
+                    }
+                )
                 if (label != options.last()) Divider(color = Color.LightGray, thickness = 1.dp)
             }
         }
@@ -114,9 +123,9 @@ fun ProfileOptions(navController: NavController) {
 }
 
 @Composable
-fun ProfileOptionButton(label: String) {
+fun ProfileOptionButton(label: String, onClick: () -> Unit) {
     TextButton(
-        onClick = { /* Tambahkan logika tombol */ },
+        onClick = onClick,
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 10.dp, horizontal = 14.dp)
